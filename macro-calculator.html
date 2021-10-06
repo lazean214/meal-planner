@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+
+<body>
+
+
+    <section id="app">
+        <div class="container py-5">
+            <a href="index.html">Return to Home</a>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Macro Calculator</h2>
+                </div>
+                <div class="card-body">
+                    <form action="">
+                        <div class="form-group mb-3">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" v-model="age" name="age" id="age" placeholder="0" min="1"
+                                max="100" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="sex">Sex</label>
+                            <div class="form-check">
+                                <label class="form-check-label" for="sex1"></label>
+                                <input class="form-check-input" type="radio" v-model="sex" name="sex" id="sex1" value="male" required>
+                                Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label" for="sex2">
+                                    <input class="form-check-input" type="radio"  v-model="sex" name="sex" id="sex2" value="female" required>
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="height">Height</label>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="metrics1">
+                                        <input class="form-check-input" type="radio" v-model="metrics" name="metrics" id="metrics1" value="feet">
+                                        Feet
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="metrics2">
+                                            <input class="form-check-input" type="radio" v-model="metrics" name="metrics" id="metrics2" value="meters">
+                                            Meters
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input type="number" class="form-control" v-model="height1" name="height1" id="height1" :placeholder="metrics === 'meters' ? 'meter' : 'feet'">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input type="number" class="form-control" v-model="height2" name="height2" id="height2" :placeholder="metrics === 'meters' ? 'centemeter' : 'inches'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="height">weight</label>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="weightmetric1"></label>
+                                        <input class="form-check-input" v-model="weightmetric" type="radio" name="weightmetric"
+                                            id="weightmetric1" value="pounds">
+                                        Pounds
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="weightmetric2">
+                                            <input class="form-check-input"  v-model="weightmetric" type="radio" name="weightmetric"
+                                                id="weightmetric2" value="kilograms">
+                                            Kilograms
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input type="number" class="form-control" v-model="actualweight" name="actualweight" id="actualweight" placeholder="0">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="age">Goal</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="goal1"></label>
+                                        <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal1" value="1" checked>
+                                        Maintain Current Weight
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="goal2">
+                                            <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal2" value="2">
+                                            Lose Weight
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="goal3">
+                                            <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal3" value="3">
+                                            Gain Weight
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="age">ACTIVITY LEVEL</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="activity1"></label>
+                                        <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity1" value="1">
+                                        Sedentary (Little or no exercise)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="activity2">
+                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity2" value="2">
+                                            Lightly active (Light exercise/sports 3-5 days a week)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="activity3">
+                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity3" value="3">
+                                            Moderately active (Moderate exercise/sports 3-5 days a week)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="activity4"></label>
+                                        <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity4" value="4">
+                                        Very active (Hard exercise/sports 6-7 days a week)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="activity5">
+                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity5" value="5">
+                                            Extra active (Hard exercise/sports 6-7 days a week, plus physical job)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button @click.prevent="submit()" class="btn btn-primary">
+                            Calculate
+                        </button>
+                    </form>
+                    <hr class="py-2">
+                    <div>
+                        <h3>Result</h3>
+                        {{ result }}
+                        {{ suggestions }}
+                    </div>
+
+                    <div v-if="isShow">
+                        <a class="btn btn-primary" href="meal-planner.html">Proceed to Meal Planner</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script >
+        
+        var app = new Vue({
+          el: '#app',
+          data: {
+                age: '',
+                sex: '',
+                metrics: '',
+                height1: '',
+                height2: '',
+                weightmetric: '',
+                actualweight: '',
+                goal: '',
+                activity: '',
+                isShow: false,
+                result: '',
+                suggestions: '',
+
+
+            },
+          
+        methods:{
+
+            submit() {
+
+               
+                this.result = "Age: " + this.age + " Gender: " + this.sex + " Height: " + this.height1 + "." + this.height2 + " " + this.metrics + " Weight: " + this.actualweight + " " + this.weightmetric + " Goal: " + this.goal + " activity: " + this.activity;
+
+                this.suggestions = " What is the computation?"
+                console.log(this.age);
+                console.log(this.sex);
+                console.log(this.metrics);
+                console.log(this.height1 + " " + this.height2);
+                console.log(this.actualweight + " " + this.weightmetric);
+                console.log(this.goal);
+                console.log(this.activity);
+                this.isShow = true;
+                // alert('Form Is Submitted.');      
+            }   
+        }  
+         })
+     </script>
+</body>
+
+</html>
