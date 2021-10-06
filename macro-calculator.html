@@ -22,7 +22,7 @@
                 <div class="card-header">
                     <h2>Macro Calculator</h2>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-5">
                     <form action="">
                         <div class="form-group mb-3">
                             <label for="age">Age</label>
@@ -31,18 +31,20 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="sex">Sex</label>
-                            <div class="form-check">
+                            <div class="d-flex">
+                            <div class="form-check p-3">
                                 <label class="form-check-label" for="sex1"></label>
-                                <input class="form-check-input" type="radio" v-model="sex" name="sex" id="sex1" value="male" required>
+                                <input class="form-check-input" type="radio" v-model="sex" name="sex" id="sex1" value="66" required>
                                 Male
                                 </label>
                             </div>
-                            <div class="form-check">
+                            <div class="form-check p-3">
                                 <label class="form-check-label" for="sex2">
-                                    <input class="form-check-input" type="radio"  v-model="sex" name="sex" id="sex2" value="female" required>
+                                    <input class="form-check-input" type="radio"  v-model="sex" name="sex" id="sex2" value="665" required>
                                     Female
                                 </label>
                             </div>
+                        </div>
                         </div>
                         <div class="form-group mb-3">
                             <label for="height">Height</label>
@@ -86,7 +88,7 @@
                                     <div class="form-check">
                                         <label class="form-check-label" for="weightmetric1"></label>
                                         <input class="form-check-input" v-model="weightmetric" type="radio" name="weightmetric"
-                                            id="weightmetric1" value="pounds">
+                                            id="weightmetric1" value="lb">
                                         Pounds
                                         </label>
                                     </div>
@@ -95,7 +97,7 @@
                                     <div class="form-check">
                                         <label class="form-check-label" for="weightmetric2">
                                             <input class="form-check-input"  v-model="weightmetric" type="radio" name="weightmetric"
-                                                id="weightmetric2" value="kilograms">
+                                                id="weightmetric2" value="kg">
                                             Kilograms
                                         </label>
                                     </div>
@@ -117,7 +119,7 @@
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="goal1"></label>
-                                        <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal1" value="1" checked>
+                                        <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal1" value="maintain" checked>
                                         Maintain Current Weight
                                         </label>
                                     </div>
@@ -125,15 +127,15 @@
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="goal2">
-                                            <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal2" value="2">
-                                            Lose Weight
+                                            <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal2" value="loose">
+                                            Loose Weight
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="goal3">
-                                            <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal3" value="3">
+                                            <input class="form-check-input" v-model="goal" type="radio" name="goal" id="goal3" value="gain">
                                             Gain Weight
                                         </label>
                                     </div>
@@ -146,7 +148,7 @@
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="activity1"></label>
-                                        <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity1" value="1">
+                                        <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity1" value="1.2">
                                         Sedentary (Little or no exercise)
                                         </label>
                                     </div>
@@ -154,7 +156,7 @@
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="activity2">
-                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity2" value="2">
+                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity2" value="1.375">
                                             Lightly active (Light exercise/sports 3-5 days a week)
                                         </label>
                                     </div>
@@ -162,7 +164,7 @@
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="activity3">
-                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity3" value="3">
+                                            <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity3" value="1.55">
                                             Moderately active (Moderate exercise/sports 3-5 days a week)
                                         </label>
                                     </div>
@@ -170,7 +172,7 @@
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <label class="form-check-label" for="activity4"></label>
-                                        <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity4" value="4">
+                                        <input class="form-check-input" v-model="activity" type="radio" name="activity" id="activity4" value="1.9">
                                         Very active (Hard exercise/sports 6-7 days a week)
                                         </label>
                                     </div>
@@ -193,6 +195,10 @@
                     <hr class="py-2">
                     <div>
                         <h3>Result</h3>
+                        <div>Basal Metabolic Rate (BMR): {{ bmr }}</div>
+                        <div>Protein: {{ protein }}</div>
+                        <div>Carbs: {{ carbs }}</div>
+                        <div>Fats: {{ fat }}</div>
                         {{ result }}
                         {{ suggestions }}
                     </div>
@@ -222,6 +228,10 @@
                 isShow: false,
                 result: '',
                 suggestions: '',
+                bmr: '',
+                protein: '',
+                carbs: '',
+                fat: '',
 
 
             },
@@ -230,17 +240,104 @@
 
             submit() {
 
-               
-                this.result = "Age: " + this.age + " Gender: " + this.sex + " Height: " + this.height1 + "." + this.height2 + " " + this.metrics + " Weight: " + this.actualweight + " " + this.weightmetric + " Goal: " + this.goal + " activity: " + this.activity;
 
-                this.suggestions = " What is the computation?"
-                console.log(this.age);
+                //BMR Women
+                // = 655 + (9.6 × weight in kg) + (1.8 × height in cm) – (4.7 × age in years)
+
+                //BMR Men
+                //  66 + (13.7 × weight in kg) + (5 × height in cm) – (6.8 × age in years)
+
+                //Activity Level
+                // = (BMR) x (activity level)
+
+                //Macro Split
+
+                /*
+                * Protien = 40%     [ total daily intake x 0.4 = total/4 = totalgrams] 
+                * Carbs = 30%       [ total daily intake x 0.3 = total/4 = totalgrams] 
+                * Fat = 30%         [ total daily intake x 0.3 = total/9 = totalgrams] 
+                */
+                
+                if (this.metrics === 'feet'){
+
+                    var convertHeightToInches = this.height1 * 12;
+                    var totalIn = convertHeightToInches + parseInt(this.height2);
+                    var h = parseInt(totalIn) * 2.54;
+                   
+                }else{
+
+                    var convertMeterToCm = this.height1 * 100;
+                    var h = convertMeterToCm + parseInt(this.height2);
+                }
+
+                if(this.weightmetric === 'lb'){
+                    var convertPoundToKg = parseInt(this.actualweight * 0.453592);
+                    var w = convertPoundToKg;
+                }else{
+                    var w = this.actualweight;
+                }
+
+                console.log("Height: " + h);
+                
+                console.log("Weight: " + w);
+
                 console.log(this.sex);
-                console.log(this.metrics);
-                console.log(this.height1 + " " + this.height2);
-                console.log(this.actualweight + " " + this.weightmetric);
-                console.log(this.goal);
-                console.log(this.activity);
+                console.log(9.6 * w);
+                console.log(1.8 * h);
+                console.log(4.7 * parseInt(this.age));
+ 
+
+                if(this.sex === 'female'){
+                    this.bmr = (665 + (9.6 * w) + (1.8 * h) - (4.7 * parseInt(this.age))) * parseInt(this.activity);
+                }else{
+                    this.bmr = (66 + (13.7 * w) + (5 * h) - (6.8 * parseInt(this.age))) * parseInt(this.activity);
+                }
+               
+                this.protein = ((this.bmr * 0.4) / 4);
+                // this.carbs = (this.bmr * 0.3) / 4;
+                // this.protein = w;
+                this.fat = (this.bmr * 0.25) / 9;
+
+                this.carbs = (this.bmr -this.protein - this.fat) / 4;
+
+                if(this.goal === 'maintain'){
+
+                    this.protein = this.protein * 1.5;
+                    this.fat = (this.bmr * 0.25) / 9;
+                    this.carbs = this.carbs;
+
+                    var pc =  this.protein;
+                    var fc = this.bmr * 0.25;
+                    var cc = this.bmr -this.protein - this.fat;
+                } 
+                
+                if(this.goal === 'loose'){
+
+                    this.protein = this.protein * 2.2;
+                    this.fat = (this.bmr * 0.20) / 9;
+                    this.carbs = this.carbs;
+
+                    var pc =  this.protein;
+                    var fc = this.bmr * 0.20;
+                    var cc = this.bmr -this.protein - this.fat;
+
+                } 
+                if(this.goal === 'gain') {
+
+                    this.protein = this.protein * 2;
+                    this.fat = (this.bmr * 0.25) / 9;
+                    this.carbs = this.carbs;
+
+                    var pc =  this.protein * 4;
+                    var fc = this.bmr * 0.25;
+                    var cc = this.bmr -this.protein - this.fat;
+
+                }
+             
+                this.protein = this.protein + "g (" + pc + ") calories";
+                this.fat = this.fat + "g (" + fc + ") calories";
+                this.carbs = this.carbs + "g (" + cc + ") calories";
+
                 this.isShow = true;
                 // alert('Form Is Submitted.');      
             }   
