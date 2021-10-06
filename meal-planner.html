@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+
+   <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <div class="container">
+              <a class="navbar-brand" href="#">Navbar</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+
+    </header>
+      <!-- <h3 class="text-success text-center">Multistep Form In VueJs</h3>
+      <br> -->
+      <div class="container py-5" id="app">
+         <div class="panel-group">
+            <div class="panel panel-primary">
+               <div class="panel-heading">Personalized Meal Plan</div>
+               <button type="button" class="btn btn-outline-primary" :class="{'btn-success' : 1 < step }">Meal</button>
+               <button type="button" class="btn btn-outline-primary"  :class="{'btn-success' : 2 < step }">Sides</button>
+               <button type="button" class="btn btn-outline-primary"  :class="{'btn-success' : 3 < step }">Snack</button>
+               <button type="button" class="btn btn-outline-primary"  :class="{'btn-success' : 4 < step }">Shake</button>
+               <form class="form-horizontal" action="/action_page.php">
+                  <fieldset v-if="step == 1">
+                     <div class="panel-body">
+                        <h4>Step 1: Choose your Meals</h4>
+                        <br>
+                        <!-- <div class="form-group">
+                           <label class="control-label col-sm-2" for="email" required>Email:</label>
+                           <div class="col-sm-5">
+                              <input type="email" class="form-control" v-model="email" name="email" required>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="pwd">Password:</label>
+                           <div class="col-sm-5"> 
+                              <input type="password" class="form-control" class="btn btn-info" v-model="pwd" name="pwd">
+                           </div>
+                        </div> -->
+                        <div class="row my-5">
+                            <div class="col-md-4 p-2"  v-for="meal in meals">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" :checked="meal.status">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ meal.name }}</label>
+                                  </div>
+                            </div>
+                        </div>
+                        
+                        <button @click.prevent="next()" class="btn btn-primary">Next</button>
+                     </div>
+                  </fieldset>
+                  <fieldset v-if="step == 2">
+                     <div class="panel-body">
+                        <h4>Step 2: Choose your sides</h4>
+                        <br>
+                        <!-- <div class="form-group">
+                           <label class="control-label col-sm-2" for="fname">First Name:</label>
+                           <div class="col-sm-5">
+                              <input type="text" class="form-control" v-model="fname" name="fname">
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="lname">Last Name:</label>
+                           <div class="col-sm-5">
+                              <input type="text" class="form-control" v-model="lname" name="lname">
+                           </div>
+                        </div> -->
+                        <div class="row my-5">
+                            <div class="col-md-4 p-2"  v-for="meal in sides">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" :checked="meal.status">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ meal.name }}</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <button @click.prevent="prev()" class="btn btn-info">Previous</button>
+                        <button @click.prevent="next()" class="btn btn-primary">Next</button>
+                     </div>
+                  </fieldset>
+                  <fieldset v-if="step == 3">
+                     <div class="panel-body">
+                        <h4>Step 3: Coos your Snacks</h4>
+                        <br>
+                        <!-- <div class="form-group">
+                           <label class="control-label col-sm-2" for="mobno">Mobile Number:</label>
+                           <div class="col-sm-5">
+                              <input type="text" class="form-control" v-model="mobno" name="mobno">
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="control-label col-sm-2" for="address">Address:</label>
+                           <div class="col-sm-5">
+                              <textarea  class="form-control" name="address" v-model="address"></textarea>
+                           </div>
+                        </div> -->
+                        <div class="row my-5">
+                            <div class="col-md-4 p-2"  v-for="meal in snacks">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" :checked="meal.status">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">{{ meal.name }}</label>
+                                  </div>
+                            </div>
+                        </div>
+                        <button @click.prevent="prev()" class="btn btn-info">Previous</button>
+                        <button @click.prevent="next()" class="btn btn-primary">Next</button>
+                     </div>
+                  </fieldset>
+                  <fieldset v-if="step == 4">
+                    <div class="panel-body">
+                       <h4>Step 4: Shoose your Shakes</h4>
+                       <br>
+                       <!-- <div class="form-group">
+                          <label class="control-label col-sm-2" for="mobno">Mobile Number:</label>
+                          <div class="col-sm-5">
+                             <input type="text" class="form-control" v-model="mobno" name="mobno">
+                          </div>
+                       </div>
+                       <div class="form-group">
+                          <label class="control-label col-sm-2" for="address">Address:</label>
+                          <div class="col-sm-5">
+                             <textarea  class="form-control" name="address" v-model="address"></textarea>
+                          </div>
+                       </div> -->
+                       <div class="row my-5">
+                        <div class="col-md-4 p-2"  v-for="meal in meals">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" :checked="meal.status">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{{ meal.name }}</label>
+                              </div>
+                        </div>
+                    </div>
+                       <button @click.prevent="prev()" class="btn btn-info">Previous</button>
+                       <button @click.prevent="next()" class="btn btn-success">Next</button>
+                    </div>
+                 </fieldset>
+                 <fieldset v-if="step == 5">
+                    <div class="panel-body">
+                       <h4>Finalizing</h4>
+                       <br>
+
+                       <div class="row my-5">
+                        <div class="col-md-4 p-2"  v-for="meal in meals">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" :checked="meal.status">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{{ meal.name }}</label>
+                              </div>
+                        </div>
+                    </div>
+                       <button @click.prevent="prev()" class="btn btn-info">Previous</button>
+                       <button @click.prevent="submit()" class="btn btn-success">Submit</button>
+                    </div>
+                 </fieldset>
+               </form>
+            </div>
+         </div>
+      </div>
+
+
+      <script >
+        var app = new Vue({
+          el: '#app',
+          data: {
+                step:1,
+                email:'',
+                pwd:'',
+                fname:'',
+                lname:'',
+                mobno:'',
+                address:'',
+
+                meals: [
+                    {
+                        name: 'Alaskan Fresh Salmon',
+                        protein: '25',
+                        status: ''
+                    },
+                    {
+                        name: 'Atlantic Caught Cod',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Full Flavour Chicken Thighs',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Juicy Meatballs',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Muscle Burger',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Succulent Chicken Breast',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Bangkok Bad Boy Vegan Burger',
+                        protein: '25',
+                        status: 'active'
+                    },
+
+                ],
+                sides: [
+                    {
+                        name: 'Basmati Rice White',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Brown Pasta',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Brown Rice',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'White Pasta',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Muscle Burger',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Sweet Potato Wedges',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Sweet Potato',
+                        protein: '25',
+                        status: 'active'
+                    },
+
+                ],
+                snacks: [
+                    {
+                        name: 'Cauliflower',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Fresh Green Beans',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Fresh Kale',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Fresh Sweetcorn',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Fresh Spinach',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    
+
+                ],
+                shakes: [
+                    {
+                        name: 'Basmati Rice White',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Brown Pasta',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Brown Rice',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'White Pasta',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Muscle Burger',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Sweet Potato Wedges',
+                        protein: '25',
+                        status: 'active'
+                    },
+                    {
+                        name: 'Sweet Potato',
+                        protein: '25',
+                        status: 'active'
+                    },
+
+                ]
+            
+            },
+        methods:{
+            prev() {
+                this.step--;
+            },
+            next() {
+                this.step++;
+            },  
+            submit() {
+                alert('Form Is Submitted.');      
+            }   
+        }  
+         })
+     </script>
+
+     </body>
+     </html>
+     
